@@ -1,0 +1,25 @@
+{
+  "name": "learnease-pro",
+  "version": "1.0.0",
+  "description": "An eLearning management system built using the MERN stack.",
+  "homepage": "https://github.com/heathmedia/LearnEase-Pro#readme",
+  "bugs": {
+    "url": "https://github.com/heathmedia/LearnEase-Pro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heathmedia/LearnEase-Pro.git"
+  },
+  "license": "ISC",
+  "author": "Scott Heath (heathmedia)",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently --kill-others --names 'SERVER,CLIENT' --prefix-colors 'blue,green' 'npm run dev --prefix server' 'npm run dev --prefix client'",
+    "install:all": "npm install & npm install --prefix server && npm install --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

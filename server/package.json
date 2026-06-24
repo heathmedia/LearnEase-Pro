@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server application for LearnEase Pro eLearning management application.",
+  "license": "ISC",
+  "author": "Scott Heath (heathmedia)",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
