@@ -3,7 +3,7 @@ const router = express.Router();
 const Course = require('../models/Course');
 
 // GET /api/courses
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const courses = await Course.find();
         res.json(courses);
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/courses:id
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const course = await Course.findById(req.params.id);
         if (!course) {
