@@ -36,6 +36,10 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
+router.get('/logout', async (req, res, next) => {
+    
+});
+
 // GET /api/auth/me - protected; returns the logged-in user
 router.get('/me', protect, (req, res) => {
     res.json({ user: req.user });

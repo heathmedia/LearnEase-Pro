@@ -41,6 +41,15 @@ learnease-pro/
 
 > **Note:** `mongosh` is the MongoDB shell *client*, not the database itself. The app does not run through it. What the app needs is the MongoDB **server** (`mongod`) running in the background.
 
+### How to Install MongoDB Community
+If MongoDB is not installed, you can install MongoDB Communtiy v8.3 via brew using the instructions below:
+```bash
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@8.3
+brew services start mongodb-community@8.3
+```
+
 ## Setup
 
 From the project root:

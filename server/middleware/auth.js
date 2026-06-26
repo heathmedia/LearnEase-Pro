@@ -25,7 +25,7 @@ const protect = async (req, res, next) => {
     }
 };
 
-const restrictTo = (...allowedRoutes) {
+const restrictTo = (...allowedRoles) => {
     return (req, res, next) => {
         if (!req.user) {
             return res.status(401).json({ error: 'Not authorized' });
