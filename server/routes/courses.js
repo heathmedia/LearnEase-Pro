@@ -28,7 +28,7 @@ router.get('/:id', protect, async (req, res) => {
 });
 
 // POST /api/courses
-router.post('/', protect, restrictTo('admin'), async (req, res, next) => {
+router.post('/', protect, restrictTo('admin', 'instructor'), async (req, res, next) => {
     try {
         const course = await Course.create(req.body);
         res.status(201).json(course);
@@ -37,7 +37,7 @@ router.post('/', protect, restrictTo('admin'), async (req, res, next) => {
     }
 });
 
-// PATCH /api/courses
+// PATCH /api/courses/:id
 router.patch('/:id', protect, restrictTo('admin', 'instructor'), async (req, res, next) => {
     try {
         const course = await Course.findByIdAndUpdate(
