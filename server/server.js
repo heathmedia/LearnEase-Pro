@@ -18,7 +18,7 @@ app.get('/api/health', (req, res) => {
 });
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/courses', require('./routes/courses'));
-app.use('/api/courses', require('./routes/users'));
+app.use('/api/users', require('./routes/users'));
 
 // 404 handler - runs only if no router above matched
 app.use((req, res) => {

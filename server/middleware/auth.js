@@ -18,6 +18,11 @@ const protect = async (req, res, next) => {
             return res.status(401).json({ error: 'Not authorized, user not found' });
         }
 
+        // Reject tokens issued before the version was bumped
+        if (decoded.tokenVersion !== user.tokenVersion) {
+            return res.status(401).json({ error: 'Session expired, please login again' });
+        }
+
         req.user = user; // hand the user to downstream routes
         next();
     } catch (err) {

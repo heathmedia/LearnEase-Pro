@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const { signToken } = require('../utils/token');
 
 // POST /api/auth/login
 router.post('/login', async (req, res, next) => {
@@ -21,11 +22,7 @@ router.post('/login', async (req, res, next) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        const token = jwt.sign(
-            { id: user._id, type: user.type },
-            process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRES_IN || '1d' }
-        );
+        const token = signToken(user);
 
         res.json({
             token,

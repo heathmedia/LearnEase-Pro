@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
             enum: ["admin", "instructor", "user"],
             required: true
         },
+        tokenVersion: {
+            type: Number,
+            default: 0
+        }
     },
     { timestamps: true } // auto-adds createdAt and updatedAt
 );

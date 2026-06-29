@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const { protect, restrictTo } = require('../middleware/auth');
+const { signToken } = require('../utils/token');
 
 // Get /api/users
 router.get('/', protect, restrictTo('admin'), async (req, res) => {
@@ -103,11 +104,16 @@ router.patch('/:id/password', protect, async (req, res, next) => {
 
         // Assign and save - pre('save') hook hashes it, schema minlength validates it
         user.password = newPassword;
+        user.tokenVersion += 1; // invalidates every previously-saved token
         await user.save();
 
-        res.json({ message: 'Password updated successfully' });
+        // Re-issue so THIS client stays logged in with a valid token
+        const token = signToken(user);
+        res.json({ message: 'Password updated successfully', token });
 
     } catch (err) {
         next(err);
     }
 });
+
+module.exports = router;
