@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from '../api/client';
 
-const AuthContenxt = createContext(null);
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -31,12 +31,14 @@ export function AuthProvider({ children }) {
     }, []);
 
     const login = async (email, password) => {
+        console.log('LOGIN called in AuthContext')
         const data = await api('api/auth/login', {
             method: 'POST',
             body: { email, password },
         });
         localStorage.setItem('token', data.token);
         setToken(data.token);
+        setUser(data.user);
         return data.user;
     };
 
@@ -55,11 +57,11 @@ export function AuthProvider({ children }) {
         isAuthenticated: !!user,
     };
 
-    return <AuthContenxt.Provider value={value}>{children}</AuthContenxt.Provider>;
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
-    const ctx = useContext(AuthContenxt);
+    const ctx = useContext(AuthContext);
     if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
     return ctx;
 }

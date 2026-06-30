@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate, useLocation, Link } from "react-router";
+import { Navigate, Link, useNavigate, useLocation } from "react-router";
 
 export default function Login() {
-    const { login } = useAuth();
+    const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError]  = useState('');
     const [submitting, setSubmitting] = useState(false);
+
+    const rawFrom = location.state?.from?.pathname || '/';
+    const from = rawFrom === '/login' ? '/' : rawFrom // Never bounce back to login
+
+    // Already logged in? Don't show the login form and send to intended location.
+    if (isAuthenticated) {
+        return <Navigate to={from} replace />;
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,9 +26,6 @@ export default function Login() {
         setSubmitting(true);
         try {
             await login(email, password);
-
-            // Once logged in, navigate to the path the user was attempting to visit
-            navigate(from, { replace: true });
         } catch (err) {
             setError(err.message);
         } finally {
