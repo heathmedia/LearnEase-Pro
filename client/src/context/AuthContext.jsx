@@ -31,8 +31,18 @@ export function AuthProvider({ children }) {
     }, []);
 
     const login = async (email, password) => {
-        console.log('LOGIN called in AuthContext')
         const data = await api('api/auth/login', {
+            method: 'POST',
+            body: { email, password },
+        });
+        localStorage.setItem('token', data.token);
+        setToken(data.token);
+        setUser(data.user);
+        return data.user;
+    };
+
+    const register = async (email, password) => {
+        const data = await api('api/auth/register', {
             method: 'POST',
             body: { email, password },
         });
@@ -54,6 +64,7 @@ export function AuthProvider({ children }) {
         loading,
         login,
         logout,
+        register,
         isAuthenticated: !!user,
     };
 

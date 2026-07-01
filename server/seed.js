@@ -15,6 +15,9 @@ const courses = [
         description: 'Variables, functions, and control flow.',
         instructor: 'Ada Lovelace',
         published: true,
+        lessons: [
+            
+        ]
     },
     {
         title: 'React Fundamentals',

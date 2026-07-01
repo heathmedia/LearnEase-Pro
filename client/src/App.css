@@ -5,3 +5,15 @@
   --color-primary-dark: #2E4BF2;
   --color-secondary: #4BA621;
 }
+
+@layer base {
+  a {
+    @apply hover:underline;
+  }
+  button {
+    @apply cursor-pointer border-1 rounded-md p-2 hover:bg-primary;
+  }
+  nav a {
+    @apply mr-4;
+  }
+}

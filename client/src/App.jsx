@@ -1,14 +1,13 @@
+import './App.css';
 import { Routes, Route, Navigate } from 'react-router';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoutes';
 import AdminRoute from './components/AdminRoute';
 import NavBar from './components/NavBar';
-import './App.css';
 import Layout from './components/Layout';
-
-function Dashboard() {
-  return <h1>Dashboard</h1>;
-}
+import Dashboard from './pages/Dashboard';
+import Courses from './pages/Courses';
+import SignUp from './pages/SignUp';
 
 function AdminPanel() {
   return <h1>Admin Panel</h1>;
@@ -22,15 +21,18 @@ function App() {
         <Routes>
           {/* Public */}
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
           {/* Logged-in users only */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/courses" element={<Courses />} />
 
               {/* Admins only - nest inside protected */}
               <Route element={<AdminRoute />}>
                 <Route path="/admin" element={<AdminPanel />} />
+                
               </Route>
             </Route>
           </Route>

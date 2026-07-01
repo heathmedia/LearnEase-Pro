@@ -20,6 +20,7 @@ export default function NavBar() {
             <nav className="text-white">
                 {isAuthenticated ? (
                     <>
+                        <span className="mr-2">{user.email}</span>
                         <Link to="/">Dashboard</Link>
 
                         {/* Admin-only links */}
